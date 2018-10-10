@@ -37,7 +37,8 @@ exports.signature = (req, res) => {
 exports.register = (req, res) => {
     const {
         publickey,
-        username
+        username,
+        user_account_address
     } = req.body
     let newUser = null
 
@@ -49,7 +50,7 @@ exports.register = (req, res) => {
 
             throw new Error('publickey exists')
         } else {
-            return User.create(publickey, username)
+            return User.create(publickey, username,user_account_address)
         }
     }
 
