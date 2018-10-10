@@ -4,15 +4,17 @@ const Schema = mongoose.Schema
 const User = new Schema({
 
     publickey: String,
-    username: String
+    username: String,
+    user_account_address: String,
 
 })
 
 // create new User document
-User.statics.create = function (publickey, username) {
+User.statics.create = function (publickey, username, user_account_address) {
     const user = new this({
         publickey,
-        username
+        username,
+        user_account_address
     })
 
     // return the Promise
