@@ -13,6 +13,6 @@ router.post('/register', controller.register)
 
 router.post('/authreq', controller.authreq)
 
-router.get('/signature/:value', controller.signature)
+router.post('/signature', controller.signature)
 
 module.exports = router

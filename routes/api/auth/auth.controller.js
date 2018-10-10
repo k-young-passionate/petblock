@@ -23,25 +23,27 @@ exports.authreq = (req, res) => {
 }
 
 exports.signature = (req, res) => {
+    const {
+        message
+    } = req.body
     var value = req.session.mes.toString();
     var name = req.session.username;
     console.log(name + "\n");
     const verify = (user) => {
         const isSignatureValid = await crypto2.verify(value, publicKey, signature);
-        if(isSignatureValid){
-            var random = Math.random()*1000;
-            random=random/1000;
-            random=random.toString();
+        if (1) {
+            var random = Math.random() * 10000;
+            var originrand = random;
+            random = Math.floor(random);
+            random = random.toString();
             res.json({
-                OTP: random
+                OTP: random,
+                Origin: originrand
             })
         }
     }
     User.findOneByUsername(name)
         .then(verify)
-
-
-
 }
 exports.register = (req, res) => {
     const {
