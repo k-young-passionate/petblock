@@ -37,19 +37,20 @@ exports.signature = (req, res) => {
 exports.register = (req, res) => {
     const {
         publickey,
-        username
+        username,
+        user_account_address
     } = req.body
     let newUser = null
 
     // create a new user if does not exist
     const create = (user) => {
-
-        console.log("asdf" + publickey + username + "\n");
+        console.log(user);
+        console.log("asdf" + publickey + username + user_account_address + "\n");
         if (user) {
 
             throw new Error('publickey exists')
         } else {
-            return User.create(publickey, username)
+            return User.create(publickey, usernamem, user_account_address)
         }
     }
 
