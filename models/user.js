@@ -5,8 +5,7 @@ const User = new Schema({
 
     publickey: String,
     username: String,
-    user_account_address: String,
-
+    user_account_address: String
 })
 
 // create new User document
@@ -23,7 +22,7 @@ User.statics.create = function (publickey, username, user_account_address) {
 
 // find one user by using username
 User.statics.findOneByUsername = function (username) {
-    console.log("asdfsaf\n");
+    //console.log("asdfsaf\n");
     return this.findOne({
         username
     }).exec()

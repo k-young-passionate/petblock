@@ -44,13 +44,17 @@ exports.register = (req, res) => {
 
     // create a new user if does not exist
     const create = (user) => {
-
-        console.log("asdf" + publickey + username + "\n");
+        console.log(user);
+        console.log("asdf" + publickey + username + user_account_address + "\n");
         if (user) {
 
             throw new Error('publickey exists')
         } else {
+<<<<<<< HEAD
             return User.create(publickey, username,user_account_address)
+=======
+            return User.create(publickey, usernamem, user_account_address)
+>>>>>>> d984ace5641a3a3d39613547ea2b0589fbc082da
         }
     }
 
