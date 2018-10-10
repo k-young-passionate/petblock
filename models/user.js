@@ -29,6 +29,8 @@ User.statics.findOneByUsername = function (username) {
 }
 
 
+
+
 // verify the password of the User documment
 User.methods.verify = function (password) {
     return this.password === password

@@ -11,7 +11,7 @@ router.use(session({
 
 router.post('/register', controller.register)
 
-router.get('/authreq', controller.authreq)
+router.post('/authreq', controller.authreq)
 
 router.get('/signature/:value', controller.signature)
 

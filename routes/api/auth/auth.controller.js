@@ -12,26 +12,27 @@ const session = require('express-session')
 
 
 exports.authreq = (req, res) => {
+    const {
+        username
+    } = req.body
     var random = Math.random();
     req.session.mes = random.toString();
+    req.session.username = username;
     console.log(req.session.mes)
     res.send(random.toString());
 }
 
 exports.signature = (req, res) => {
     var value = req.params.value.toString();
-
-    if (req.session.mes) {
-        if (value == req.session.mes) {
-            res.send('맞아요.\n');
-        } else {
-            res.send("틀렸음\n");
-        }
-
-    } else {
-        console.log(req.session.mes);
-        res.send("plz authreq first");
+    var name = req.session.username;
+    console.log(name + "\n");
+    const verify = (user) => {
+        console.log(user + "\n");
     }
+    User.findOneByUsername(name)
+        .then(verify)
+
+
 
 }
 exports.register = (req, res) => {
@@ -40,27 +41,26 @@ exports.register = (req, res) => {
         username,
         user_account_address
     } = req.body
-    let newUser = null
 
     // create a new user if does not exist
-    const create = (user) => {
-        console.log(user);
-        console.log("asdf" + publickey + username + user_account_address + "\n");
-        if (user) {
+    const create = (err) => {
+        console.log(err);
+
+        if (err) {
 
             throw new Error('publickey exists')
         } else {
-            return User.create(publickey, usernamem, user_account_address)
+            return User.create(publickey, username, user_account_address)
+
         }
     }
 
 
 
     // respond to the client
-    const respond = (isAdmin) => {
+    const respond = () => {
         res.json({
-            message: 'registered successfully',
-            admin: isAdmin ? true : false
+            message: 'registered successfully'
         })
     }
 
