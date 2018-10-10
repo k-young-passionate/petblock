@@ -50,8 +50,16 @@ exports.register = (req, res) => {
 
             throw new Error('publickey exists')
         } else {
+<<<<<<< HEAD
             return User.create(publickey, username, user_account_address)
 
+=======
+<<<<<<< HEAD
+            return User.create(publickey, username,user_account_address)
+=======
+            return User.create(publickey, usernamem, user_account_address)
+>>>>>>> d984ace5641a3a3d39613547ea2b0589fbc082da
+>>>>>>> ae8bb956aa9eb9ac0394513d130cb213fb4b9287
         }
     }
 
