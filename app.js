@@ -2,8 +2,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-const session = require('express-session');
+const Grid = require('gridfs-stream')
+const session = require('express-session')
 
+Grid.mongo = mongoose.mongo;
+var gfs;
 /* =======================
     LOAD THE CONFIG
 ==========================*/
@@ -37,7 +40,7 @@ app.set('jwt-secret', config.secret)
 
 // index page, just for testing
 app.get('/', (req, res) => {
-    res.send('Hello JWT')
+
 })
 
 // configure api router
@@ -60,7 +63,8 @@ app.listen(3002, () => {
 /* =======================
     CONNECT TO MONGODB SERVER
 ==========================*/
-mongoose.connect(config.mongodbUri)
+
+mongoose.connect(config.mongodbUri_userdata)
 const db = mongoose.connection
 db.on('error', console.error)
 db.once('open', () => {

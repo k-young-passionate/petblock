@@ -1,7 +1,7 @@
 const User = require('../../../models/user')
 const jwt = require('jsonwebtoken')
 const session = require('express-session')
-const crypto2 = require('crypto2');
+//const crypto2 = require('crypto2');
 /*
     POST /api/auth/register
     {
@@ -30,7 +30,7 @@ exports.signature = (req, res) => {
     var name = req.session.username;
     console.log(name + "\n");
     const verify = (user) => {
-        const isSignatureValid = await crypto2.verify(value, publicKey, signature);
+        //  const isSignatureValid = await crypto2.verify(value, publicKey, signature);
         if (1) {
             var random = Math.random() * 10000;
             var originrand = random;
