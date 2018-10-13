@@ -1,6 +1,11 @@
 const Files = require('../../../models/file')
 const jwt = require('jsonwebtoken')
 
+
+
+
+
+
 exports.register = (req, res) => {
     const {
         file_hash,
