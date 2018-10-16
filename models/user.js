@@ -5,15 +5,17 @@ const User = new Schema({
 
     publickey: String,
     username: String,
-    user_account_address: String
+    user_account_address: String,
+    Pet_name: String
 })
 
 // create new User document
-User.statics.create = function (publickey, username, user_account_address) {
+User.statics.create = function (publickey, username, user_account_address, Pet_name) {
     const user = new this({
         publickey,
         username,
-        user_account_address
+        user_account_address,
+        Pet_name
     })
 
 

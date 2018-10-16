@@ -1,6 +1,8 @@
 const User = require('../../../models/user')
 const jwt = require('jsonwebtoken')
 const session = require('express-session')
+const fs = require('fs')
+
 //const crypto2 = require('crypto2');
 /*
     POST /api/auth/register
@@ -21,6 +23,12 @@ exports.authreq = (req, res) => {
     console.log(req.session.mes)
     res.send(random.toString());
 }
+/*exports.petadd = (req, res) => {
+    const {
+        pet_name,
+    } = req.body
+
+}*/
 
 exports.signature = (req, res) => {
     const {
@@ -49,7 +57,8 @@ exports.register = (req, res) => {
     const {
         publickey,
         username,
-        user_account_address
+        user_account_address,
+        Pet_name
     } = req.body
 
     // create a new user if does not exist
@@ -58,9 +67,19 @@ exports.register = (req, res) => {
 
         if (err) {
 
+
             throw new Error('publickey exists')
         } else {
-            return User.create(publickey, username, user_account_address)
+            var dir = 'uploads/';
+            dir = dir + username.toString();
+            console.log(dir);
+            fs.mkdirSync(dir);
+            console.log(publickey);
+            console.log(username);
+            console.log(user_account_address);
+            console.log(Pet_name);
+
+            return User.create(publickey, username, user_account_address, Pet_name)
 
         }
     }
@@ -69,6 +88,7 @@ exports.register = (req, res) => {
 
     // respond to the client
     const respond = () => {
+        console.log('registered successfully');
         res.json({
             message: 'registered successfully'
         })
@@ -76,6 +96,7 @@ exports.register = (req, res) => {
 
     // run when there is an error (username exists)
     const onError = (error) => {
+        console.log('publicket exist');
         res.status(409).json({
             message: error.message
         })

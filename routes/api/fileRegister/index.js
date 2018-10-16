@@ -1,29 +1,18 @@
 const router = require('express').Router()
 const controller = require('./fileRegister.controller')
 var multer = require('multer');
+var formdata = require('form-data');
+const bodyParser = require('body-parser');
+const formidable = require('formidable')
+
+
+
 var upload = multer({
-    dest: 'uploads/'
+    dest: 'temp_storage/'
 })
 
+router.post('/uploadfile', controller.uploadfile)
 
-
-
-router.post('/fileUpload', controller.register)
-router.post('/up', upload.single('userfile'), function (req, res) {
-    let file = req.file;
-
-    let result = {
-        originalName: file.originalname,
-        size: file.size,
-    }
-
-    res.json(result);
-})
-router.get('/uploadform', function (req, res) {
-
-    res.render('upload');
-
-})
 
 
 module.exports = router

@@ -1,7 +1,37 @@
 const Files = require('../../../models/file')
 const jwt = require('jsonwebtoken')
+var multer = require('multer');
+var formdata = require('form-data');
+const bodyParser = require('body-parser');
+const formidable = require('formidable')
 
 
+
+var upload = multer({
+    dest: 'temp_storage/'
+})
+
+
+exports.uploadfile = (req, res) => {
+    var form = new formidable.IncomingForm();
+    form.keepExceptions = true;
+    var username = [];
+    form.parse(req);
+
+    form.on('field', function (name, value) {
+
+        username.push(value.toString() + '/');
+    }).on('fileBegin', function (name, file) {
+        file.path = 'uploads/' + username[0].toString() + file.name;
+        console.log()
+    }).on('file', function (name, file) {
+        console.log('Uploaded ' + file.name);
+    }).on('end', function () {
+        console.log(username[0]);
+    })
+    res.send('oksy');
+
+}
 
 
 

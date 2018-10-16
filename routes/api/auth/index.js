@@ -11,6 +11,8 @@ router.use(session({
 
 router.post('/register', controller.register)
 
+//router.post('/Petadd', controller.petadd)
+
 router.post('/authreq', controller.authreq)
 
 router.post('/signature', controller.signature)
