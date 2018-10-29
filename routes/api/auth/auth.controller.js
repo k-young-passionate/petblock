@@ -55,6 +55,25 @@ exports.signature = (req, res) => {
     User.findOneByUsername(name)
         .then(verify)
 }
+
+//수의사 OTP로 유저 정보 받기
+exports.doctor = (req, res) => {
+    const {
+        OTP
+    } = req.body
+    const sendusrdata=(user)=>{
+        res.json({
+            name:username,
+            address:user_account_address,
+            pet_name:Pet_name
+        })
+        //OTP를 폭파(일회용으로 한정하기 위함)
+        OTP=null
+    }
+    User.findOneByOTP(OTP)
+        .then(sendusrdata)
+}
+
 exports.register = (req, res) => {
     const {
         publickey,

@@ -37,5 +37,11 @@ User.statics.findOneByUsername = function (username) {
     }).exec()
 }
 
+User.statics.findOneByOTP = function (OTP) {
+    return this.findOne({
+        OTP
+    }).exec()
+}
+
 
 module.exports = mongoose.model('User', User)
