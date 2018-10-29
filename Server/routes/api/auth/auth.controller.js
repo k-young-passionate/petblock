@@ -3,7 +3,7 @@ const OTP_schema = require('../../../models/OTP')
 const jwt = require('jsonwebtoken')
 const session = require('express-session')
 const fs = require('fs')
-const crypto2 = require('crypto2');
+const NodeRSA = require('node-rsa');
 
 /*
     POST /api/auth/register
@@ -39,10 +39,16 @@ exports.signature = (req, res) => {
     var name = req.session.username;
     console.log(name);
     const verify = (user) => {
+        const key = new NodeRSA();
+        key.importKey(publickey, 'pkcs8');
+        const isSignatureValid = key.verify(value, signature, 'base64','base64');
         //  const isSignatureValid = await crypto2.verify(value, publicKey, signature);
+        if(isSignatureValid){
+            console.log("valid signature!");
+        }
         if (user) {
 
-
+            
             var random = Math.random() * 10000;
             var originrand = random;
             random = Math.floor(random);
