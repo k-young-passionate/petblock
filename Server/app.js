@@ -7,8 +7,6 @@ const session = require("express-session");
 var fs = require('fs');
 const multer = require('multer');
 
-Grid.mongo = mongoose.mongo;
-var gfs;
 /* =======================
     LOAD THE CONFIG
 ==========================*/
@@ -44,12 +42,7 @@ app.use(morgan("dev"));
 // set the secret key variable for jwt
 app.set("jwt-secret", config.secret);
 
-// index page, just for testing
 
-// index page, just for testing
-app.get("/", (req, res) => {
-    res.send("fuck you android");
-});
 
 // configure api router
 app.use("/api", require("./routes/api"));
@@ -59,9 +52,6 @@ app.listen(3001, () => {
     console.log(`Express is running on port 3001`);
 });
 
-/* =======================
-    CONNECT TO MONGODB SERVER
-==========================*/
 
 mongoose.connect(config.mongodbUri_userdata);
 const db = mongoose.connection;

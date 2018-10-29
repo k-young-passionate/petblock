@@ -12,6 +12,7 @@ var upload = multer({
 })
 
 router.post('/uploadfile', controller.uploadfile)
+router.post('/filedownloads', controller.downloadfile)
 
 
 

@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken')
 var multer = require('multer');
 var formdata = require('form-data');
 const bodyParser = require('body-parser');
-const formidable = require('formidable')
+const formidable = require('formidable');
+const session = require('express-session');
 
 
 
@@ -33,6 +34,22 @@ exports.uploadfile = (req, res) => {
 
 }
 
+exports.downloadfile = (req, res) => {
+    console.log(req.session.isdoctor);
+    req.session.isdoctor++;
+    if (req.session.isdoctor >= 1) {
+        const {
+            username,
+            filename
+        } = req.body
+        var path = "uploads/" + username.toString() + "/" + filename.toString();
+        res.send(path);
+    } else {
+        res.json({
+            message: "plz auth OTP first"
+        })
+    }
+}
 
 
 

@@ -1,4 +1,5 @@
 const User = require('../../../models/user')
+const OTP_schema = require('../../../models/OTP')
 const jwt = require('jsonwebtoken')
 const session = require('express-session')
 const fs = require('fs')
@@ -36,44 +37,70 @@ exports.signature = (req, res) => {
     } = req.body
     var value = req.session.mes.toString();
     var name = req.session.username;
-    console.log(name + "\n");
+    console.log(name);
     const verify = (user) => {
-        //const isSignatureValid = await crypto2.verify(value, publicKey, signature);
-        //if(isSignatureValid){
-        if (1) {
+        //  const isSignatureValid = await crypto2.verify(value, publicKey, signature);
+        if (user) {
+
+
             var random = Math.random() * 10000;
             var originrand = random;
             random = Math.floor(random);
             random = random.toString();
+            // console.log(user + "asdf");
             res.json({
                 OTP: random,
                 Origin: originrand
             })
-            this.saveOTP(random)
+            OTP_schema.create(random, name);
+
+
+        } else {
+
+            res.json({
+                message: "user not find"
+            })
         }
+
     }
     User.findOneByUsername(name)
         .then(verify)
 }
 
-//수의사 OTP로 유저 정보 받기
-exports.doctor = (req, res) => {
-    const {
-        OTP
-    } = req.body
-    const sendusrdata=(user)=>{
-        res.json({
-            name:username,
-            address:user_account_address,
-            pet_name:Pet_name
-        })
-        //OTP를 폭파(일회용으로 한정하기 위함)
-        OTP=null
-    }
-    User.findOneByOTP(OTP)
-        .then(sendusrdata)
+exports.filedown = (req, res) => {
+    console.log(req.session.isdoctor);
+    res.send("asdfsf");
+
 }
 
+exports.OTPauth = (req, res) => {
+    const {
+        given_OTP
+    } = req.body
+
+    var otp_auth_comp = function (err) {
+
+        if (err) {
+            req.session.isdoctor = 1;
+            OTP_schema.deleteByOTP(given_OTP)
+                .then(function () {
+                    console.log("delete complete");
+                })
+
+            res.json({
+                message: "now you're authenticated, good day doctor"
+            })
+        } else {
+            res.json({
+                message: "OTP is wrong. try again"
+            })
+
+        }
+    }
+    console.log(given_OTP)
+    OTP_schema.findOneByOTP(given_OTP)
+        .then(otp_auth_comp)
+}
 exports.register = (req, res) => {
     const {
         publickey,

@@ -11,10 +11,11 @@ router.use(session({
 
 router.post('/register', controller.register)
 
-//router.post('/Petadd', controller.petadd)
+router.post('/OTPauth', controller.OTPauth)
 
 router.post('/authreq', controller.authreq)
 
 router.post('/signature', controller.signature)
+router.post('/filedown', controller.filedown)
 
 module.exports = router
