@@ -38,7 +38,8 @@ exports.signature = (req, res) => {
     var name = req.session.username;
     console.log(name + "\n");
     const verify = (user) => {
-        //  const isSignatureValid = await crypto2.verify(value, publicKey, signature);
+        //const isSignatureValid = await crypto2.verify(value, publicKey, signature);
+        //if(isSignatureValid){
         if (1) {
             var random = Math.random() * 10000;
             var originrand = random;
@@ -48,6 +49,7 @@ exports.signature = (req, res) => {
                 OTP: random,
                 Origin: originrand
             })
+            this.saveOTP(random)
         }
     }
     User.findOneByUsername(name)

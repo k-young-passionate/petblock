@@ -6,7 +6,8 @@ const User = new Schema({
     publickey: String,
     username: String,
     user_account_address: String,
-    Pet_name: String
+    Pet_name: String,
+    OTP:String
 })
 
 // create new User document
@@ -21,6 +22,11 @@ User.statics.create = function (publickey, username, user_account_address, Pet_n
 
     // return the Promise
     return user.save()
+}
+
+// User의 OTP를 저장
+User.statics.saveOTP=function(OTP){
+    this.OTP=new String(OTP)
 }
 
 // find one user by using username
