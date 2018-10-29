@@ -3,8 +3,8 @@ const OTP_schema = require('../../../models/OTP')
 const jwt = require('jsonwebtoken')
 const session = require('express-session')
 const fs = require('fs')
+const crypto2 = require('crypto2');
 
-//const crypto2 = require('crypto2');
 /*
     POST /api/auth/register
     {
