@@ -116,7 +116,7 @@ exports.register = (req, res) => {
         if (err) {
 
 
-            throw new Error('username exists')
+            throw new Error('username exists, try again!')
         } else {
             var dir = 'uploads/';
             dir = dir + username.toString();
