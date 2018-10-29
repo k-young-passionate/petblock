@@ -116,7 +116,7 @@ exports.register = (req, res) => {
         if (err) {
 
 
-            throw new Error('publickey exists')
+            throw new Error('username exists')
         } else {
             var dir = 'uploads/';
             dir = dir + username.toString();
