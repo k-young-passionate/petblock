@@ -1,15 +1,15 @@
 
 #
 
-## Server deploy the smartcontract
+## -Server deploy the smartcontract
 #### contract owner is server
 
 #### Only server can use the contract
 --------------------------------------------------------------
-## **functions and so on**.
+## **·functions and so on**.
 
 
-### inform
+### -inform
 
 #### triple mapping.
 #### first address is pet owner's address.
@@ -17,28 +17,28 @@
 #### third uint is pet's medical certificate index.
 #### fourth bytes32 is the hashed value of the certificate.
 --------------------------------------------------------------
-### register
+### -register
 
 #### regist the pet's medical certificate.
 #### all indexes are classified by server.
 --------------------------------------------------------------
-### check
+### -check
 
 #### compare input hash value with registed.
 #### if they are same, return true.
 
-### die
+### -die
 
 #### customer can request this function to server when the pet is dead.
 #### The medical certificate index 0 indicates whether or not death occurred.
 #### When it occurs, "die" is the value of inform[][][0].
 
-### changing
+### -changing
 
 #### customer can requrest this function to server when a pet's owner is changing to other person.
 #### data migration function.
 
-### callback
+### -callback
 
 #### if user calls wrong function name, revert user's request.
 Copyright ⓒ 2018 Sungkyunkwan University Blockchain R&D Academy. All rights reserved
