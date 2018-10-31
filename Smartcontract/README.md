@@ -6,7 +6,7 @@
 
 #### Only server can use the contract
 
-## **·functions and so on**.
+## **· functions and so on**.
 
 
 ### -inform
