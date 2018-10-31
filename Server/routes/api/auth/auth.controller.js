@@ -39,15 +39,18 @@ exports.signature = (req, res) => {
     var name = req.session.username;
     console.log(name);
     const verify = (user) => {
-        const key = new NodeRSA();
-        key.importKey(publickey, 'pkcs8');
-        const isSignatureValid = key.verify(value, signature, 'base64','base64');
-        //  const isSignatureValid = await crypto2.verify(value, publicKey, signature);
-        if(isSignatureValid){
-            console.log("valid signature!");
-        }
+    
         if (user) {
+            //RSA verify code
+            const key = new NodeRSA();
+            const sig = new Buffer(signature, 'base64');
+            console.log(user[publickey]);
+            key.importKey(user[publickey]);
+            const isSignatureValid = key.verify(value, sig);
 
+            if(isSignatureValid){
+                console.log("valid signature!");
+            }
             
             var random = Math.random() * 10000;
             var originrand = random;
