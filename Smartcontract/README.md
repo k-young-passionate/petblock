@@ -1,5 +1,5 @@
 
-#
+# Smart contract of pet block
 
 ## -Server deploy the smartcontract
 #### contract owner is server
