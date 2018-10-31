@@ -5,7 +5,7 @@
 #### contract owner is server
 
 #### Only server can use the contract
---------------------------------------------------------------
+
 ## **·functions and so on**.
 
 
@@ -16,12 +16,12 @@
 #### second uint is pet index.
 #### third uint is pet's medical certificate index.
 #### fourth bytes32 is the hashed value of the certificate.
---------------------------------------------------------------
+
 ### -register
 
 #### regist the pet's medical certificate.
 #### all indexes are classified by server.
---------------------------------------------------------------
+
 ### -check
 
 #### compare input hash value with registed.
