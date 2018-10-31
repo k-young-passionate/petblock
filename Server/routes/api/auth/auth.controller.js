@@ -39,19 +39,23 @@ exports.signature = (req, res) => {
     var name = req.session.username;
     console.log(name);
     const verify = (user) => {
-    
+
         if (user) {
             //RSA verify code
+
+
             const key = new NodeRSA();
-            const sig = new Buffer(signature, 'base64');
-            console.log(user[publickey]);
+            const sig = new Buffer(message, 'base64');
+            console.log("message is " + message);
+            console.log("sig is " + sig);
+
             key.importKey(user[publickey]);
             const isSignatureValid = key.verify(value, sig);
 
-            if(isSignatureValid){
+            if (isSignatureValid) {
                 console.log("valid signature!");
             }
-            
+
             var random = Math.random() * 10000;
             var originrand = random;
             random = Math.floor(random);
