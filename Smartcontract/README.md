@@ -2,4 +2,4 @@
 
 ## store all pet owner address, pet index value, medical certificate index value, medical certificate hash value by event log.
 
-## Use web3.js ver 1.0.0 beta(if you use other version, it can be failed)
+## Use web3.js ver 1.0.0 beta(if you use other versions, it can be failed)
