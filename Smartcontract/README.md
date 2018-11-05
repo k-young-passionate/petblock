@@ -4,4 +4,4 @@
 
 ## Use web3.js ver 1.0.0 beta(if you use other versions, it can be failed)
 
-#### Copyright ⓒ 2018 Sungkyunkwan University Blockchain R&D Academy. All rights reserved
+#### Copyright ⓒ 2018 Sungkyunkwan University Blockchain R&D Academy, SKKone. All rights reserved
