@@ -15,4 +15,4 @@
 ### 5. User sends OTP to doctor
 ### 6. Doctor sends OTP to server and get user's address and info
 
-Copyright ⓒ 2018 Sungkyunkwan University Blockchain R&D Academy. All rights reserved
+Copyright ⓒ 2018 Sungkyunkwan University Blockchain R&D Academy, SKKone. All rights reserved
