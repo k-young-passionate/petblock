@@ -1,0 +1,15 @@
+{
+  "name": "smartcontract",
+  "version": "1.0.0",
+  "description": "## store all pet owner address, pet index value, medical certificate index value, medical certificate hash value by event log.",
+  "main": "get_events.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ethereumjs-tx": "^1.3.7",
+    "web3": "^1.0.0-beta.36"
+  }
+}
