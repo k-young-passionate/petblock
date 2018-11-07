@@ -14,14 +14,18 @@ var upload = multer({
 
 
 exports.uploadfile = (req, res) => {
+    //session auth 인증후 해야함
+    console.log(req.session.username_to_treat);
+    console.log(req.session.isdoctor);
     var form = new formidable.IncomingForm();
     form.keepExceptions = true;
     var username = [];
     form.parse(req);
 
+
     form.on('field', function (name, value) {
 
-        username.push(value.toString() + '/');
+        username.push(req.session.username_to_treat.toString() + '/');
     }).on('fileBegin', function (name, file) {
         file.path = 'uploads/' + username[0].toString() + file.name;
         console.log()

@@ -83,7 +83,7 @@ exports.signature = (req, res) => {
         })
     } else {
 
-        var random = Math.random() * 10000;
+        /*var random = Math.random() * 10000;
         var originrand = random;
         random = Math.floor(random);
         random = random.toString();
@@ -92,9 +92,33 @@ exports.signature = (req, res) => {
             OTP: random,
             Origin: originrand
         })
-        OTP_schema.create(random, name);
+        OTP_schema.create(random, name);*/
+
+        req.session.logined = "user";
     }
 }
+exports.OTPreq = (req, res) => {
+    // if (req.session.logined == "user") {
+    var random = Math.random() * 10000;
+    var originrand = random;
+    random = Math.floor(random);
+    random = random.toString();
+    // console.log(user + "asdf");
+    res.json({
+        OTP: random,
+        Origin: originrand
+    })
+    console.log(req.session.username.toString());
+    OTP_schema.create(random, req.session.username);
+
+    /*} else {
+        res.json({
+            message: "plz login first"
+        })
+    }*/
+}
+
+
 
 exports.filedown = (req, res) => {
     console.log(req.session.isdoctor);
@@ -111,6 +135,8 @@ exports.OTPauth = (req, res) => {
 
         if (err) {
             req.session.isdoctor = 1;
+            req.session.username_to_treat = err["user_name"];
+            console.log(req.session.username_to_treat);
             OTP_schema.deleteByOTP(given_OTP)
                 .then(function () {
                     console.log("delete complete");

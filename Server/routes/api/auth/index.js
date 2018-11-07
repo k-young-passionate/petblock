@@ -12,6 +12,7 @@ router.use(session({
 router.post('/register', controller.register)
 
 router.post('/OTPauth', controller.OTPauth)
+router.post('/OTPreq', controller.OTPreq)
 
 router.post('/authreq', controller.authreq)
 
