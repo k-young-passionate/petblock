@@ -18,12 +18,36 @@ exports.authreq = (req, res) => {
     const {
         username
     } = req.body
-    var random = Math.random();
-    req.session.mes = random.toString();
-    req.session.username = username;
-    console.log(req.session.mes)
-    res.send(random.toString());
+    const checkusername = (user) =>{
+        if(user){
+
+            var random = Math.random();
+
+            //session에 데이터를 저장(random number, publickey, username)
+            req.session.mes = random.toString();
+            req.session.publickey = user["publickey"];
+            req.session.username = username;
+
+            console.log(req.session.mes)
+            console.log(req.session.publickey)
+
+            res.json({
+                nonce : random.toString(),
+                publickey : user["publickey"]
+            })
+        }
+        else{
+            res.json({
+                message: "user not find"
+            })
+        }
+    }
+
+    //authreq 단계에서 유저의 이름을 받아 이름이 있는지 확인
+    User.findOneByUsername(name)
+        .then(checkusername)
 }
+
 /*exports.petadd = (req, res) => {
     const {
         pet_name,
@@ -35,49 +59,34 @@ exports.signature = (req, res) => {
     const {
         message
     } = req.body
+
     var value = req.session.mes.toString();
     var name = req.session.username;
+    const pubkey=req.session.publickey;
+    
+    const key = new NodeRSA();
+    const sig = new Buffer(message, 'base64');
+
     console.log(name);
-    const verify = (user) => {
+    console.log("message is " + message);
+    console.log("sig is " + sig);
 
-        if (user) {
-            //RSA verify code
-
-
-            const key = new NodeRSA();
-            const sig = new Buffer(message, 'base64');
-            console.log("message is " + message);
-            console.log("sig is " + sig);
-
-            key.importKey(user[publickey]);
-            const isSignatureValid = key.verify(value, sig);
-
-            if (isSignatureValid) {
-                console.log("valid signature!");
-            }
-
-            var random = Math.random() * 10000;
-            var originrand = random;
-            random = Math.floor(random);
-            random = random.toString();
-            // console.log(user + "asdf");
-            res.json({
-                OTP: random,
-                Origin: originrand
-            })
-            OTP_schema.create(random, name);
-
-
-        } else {
-
-            res.json({
-                message: "user not find"
-            })
-        }
-
+    key.importKey(pubkey);
+    const isSignatureValid = key.verify(value, sig);
+    if (isSignatureValid) {
+        console.log("valid signature!");
     }
-    User.findOneByUsername(name)
-        .then(verify)
+
+    var random = Math.random() * 10000;
+    var originrand = random;
+    random = Math.floor(random);
+    random = random.toString();
+    // console.log(user + "asdf");
+    res.json({
+        OTP: random,
+        Origin: originrand
+    })
+    OTP_schema.create(random, name);
 }
 
 exports.filedown = (req, res) => {
