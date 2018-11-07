@@ -18,8 +18,8 @@ exports.authreq = (req, res) => {
     const {
         username
     } = req.body
-    const checkusername = (user) =>{
-        if(user){
+    const checkusername = (user) => {
+        if (user) {
 
             var random = Math.random();
 
@@ -32,11 +32,10 @@ exports.authreq = (req, res) => {
             console.log(req.session.publickey)
 
             res.json({
-                nonce : random.toString(),
-                publickey : user["publickey"]
+                nonce: random.toString(),
+                publickey: user["publickey"]
             })
-        }
-        else{
+        } else {
             res.json({
                 message: "user not find"
             })
@@ -44,7 +43,7 @@ exports.authreq = (req, res) => {
     }
 
     //authreq 단계에서 유저의 이름을 받아 이름이 있는지 확인
-    User.findOneByUsername(name)
+    User.findOneByUsername(username)
         .then(checkusername)
 }
 
@@ -62,31 +61,39 @@ exports.signature = (req, res) => {
 
     var value = req.session.mes.toString();
     var name = req.session.username;
-    const pubkey=req.session.publickey;
-    
-    const key = new NodeRSA();
-    const sig = new Buffer(message, 'base64');
+    const pubkey = req.session.publickey;
 
     console.log(name);
     console.log("message is " + message);
+    console.log(pubkey);
+    console.log(value);
+
+    const key = new NodeRSA();
+    const sig = new Buffer(message, 'base64');
+
+
     console.log("sig is " + sig);
 
     key.importKey(pubkey);
     const isSignatureValid = key.verify(value, sig);
     if (isSignatureValid) {
         console.log("valid signature!");
-    }
+        res.json({
+            message: "invalid_signature"
+        })
+    } else {
 
-    var random = Math.random() * 10000;
-    var originrand = random;
-    random = Math.floor(random);
-    random = random.toString();
-    // console.log(user + "asdf");
-    res.json({
-        OTP: random,
-        Origin: originrand
-    })
-    OTP_schema.create(random, name);
+        var random = Math.random() * 10000;
+        var originrand = random;
+        random = Math.floor(random);
+        random = random.toString();
+        // console.log(user + "asdf");
+        res.json({
+            OTP: random,
+            Origin: originrand
+        })
+        OTP_schema.create(random, name);
+    }
 }
 
 exports.filedown = (req, res) => {
