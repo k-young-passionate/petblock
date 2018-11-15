@@ -13,15 +13,19 @@ const Weather = ({ weather, temperature }) => {
       ]}
     >
       <View style={styles.headerContainer}>
+
       </View>
       <View style={styles.bodyContainer}>
+      <View style={styles.headerContainer}>
         <MaterialCommunityIcons
-          size={40}
+          size={72}
           name={weatherConditions[weather].icon}
           color={'#fff'}
         />
+        <Text style={styles.tempText}>{temperature}˚C</Text>
+        </View>
+        
         <Text style={styles.title}>{weatherConditions[weather].title}</Text>
-        <Text style={styles.title}>{temperature}˚C</Text>
       </View>
     </View>
   );
@@ -37,22 +41,31 @@ const styles = StyleSheet.create({
     flex: 1
   },
   headerContainer: {
-    flex: 1,
+    flex: 0,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around'
   },
+  tempText: {
+    marginLeft: 20,
+    fontSize: 50,
+    color: '#fff'
+  },
   bodyContainer: {
     flex: 2,
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
     justifyContent: 'flex-end',
-    paddingRight: 25,
+    paddingLeft: 25,
     marginBottom: 40
   },
   title: {
-    fontSize: 20,
+    fontSize: 60,
     color: '#fff'
   },
+  subtitle: {
+    fontSize: 24,
+    color: '#fff'
+  }
 });
 
 export default Weather;
